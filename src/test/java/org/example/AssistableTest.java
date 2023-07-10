@@ -12,10 +12,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Main {
+public class AssistableTest {
 
     static AppiumDriver<MobileElement> driver;
-
     @Before
     public void setUp() throws MalformedURLException {
         DesiredCapabilities cap = new DesiredCapabilities();
@@ -25,8 +24,8 @@ public class Main {
         cap.setCapability("platformName", "Android");
         cap.setCapability("platformVersion", "10");
 
-        cap.setCapability("appPackage", "com.sec.android.app.popupcalculator");
-        cap.setCapability("appActivity", "com.sec.android.app.popupcalculator.Calculator");
+        cap.setCapability("appPackage", "com.formsapp");
+        cap.setCapability("appActivity", "com.formsapp.MainActivity");
 
         URL url = new URL("http://127.0.0.1:4723/wd/hub");
         driver = new AppiumDriver<MobileElement>(url, cap);
@@ -43,8 +42,6 @@ public class Main {
 
     @Test
     public void testCalculator() {
-
-
         MobileElement one = driver.findElement(By.id("com.sec.android.app.popupcalculator:id/calc_keypad_btn_01"));
         one.click();
         MobileElement plus = driver.findElement(By.id("com.sec.android.app.popupcalculator:id/calc_keypad_btn_add"));
@@ -62,6 +59,6 @@ public class Main {
 
         System.out.println("The Result is: " + res);
         Assert.assertEquals("6", res);
-
     }
+
 }
