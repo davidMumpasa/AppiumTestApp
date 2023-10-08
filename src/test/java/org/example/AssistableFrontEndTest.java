@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -46,25 +48,67 @@ public class AssistableFrontEndTest {
         }
     }
 
+//    @Test
+//    public void testCalculator() {
+//
+//        MobileElement registerBtn = driver.findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"New User ? Sign Up\"]/android.widget.TextView"));
+//        registerBtn.click();
+//
+//        MobileElement idField = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.EditText"));
+//        idField.setValue("1234567891234");
+//
+//        MobileElement verifyBtn = driver.findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"Verify\"]/android.widget.TextView"));
+//        verifyBtn.click();
+//
+//    }
+
     @Test
     public void testCalculator() {
 
+        MobileElement loginBtn = driver.findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"Login\"]/android.widget.TextView"));
+        loginBtn.click();
 
-        MobileElement username = driver.findElement(By.className("android.widget.EditText"));
-        username.click();
-        MobileElement password = driver.findElement(By.className("android.widget.EditText"));
-        password.click();
-//        MobileElement loginBtn = driver.findElement(By.id("00000000-0000-00f3-ffff-ffff00000016"));
-//        loginBtn.click();
+        WebDriverWait wait = new WebDriverWait(driver, 30); // Wait for up to 30 seconds
+        MobileElement loginError = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TextView")));
+        String errorAlert = loginError.getText();
+
+        System.out.println(errorAlert);
+
+        if(errorAlert.equals("Please fill in both email and password.")){
+            MobileElement alertOkBtn = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button"));
+            alertOkBtn.click();
+
+            MobileElement registerBtn = driver.findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"New User ? Sign Up\"]/android.widget.TextView"));
+            registerBtn.click();
+
+            // id verification button
+            MobileElement verifyBtn = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//android.view.ViewGroup[@content-desc='Verify']/android.widget.TextView")));
+            verifyBtn.click();
+
+            // id alert error message
+            MobileElement idErrorAlert = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TextView"));
+            String idErrorAlertStr = idErrorAlert.getText();
+            System.out.println(idErrorAlertStr);
+
+            if(idErrorAlertStr.equals("ID number must have exactly 13 digits")){
+                // id alert error message button
+                MobileElement idAlertBtn = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button"));
+                idAlertBtn.click();
+
+                // Fill the form
+                MobileElement idField = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.EditText"));
+                idField.setValue("1234567891234");
+
+                verifyBtn.click();
 
 
-        String res = username.getText()+" "+ password.getText();
+            }
 
-        System.out.println("The Result is: " + res);
-//        Assert.assertEquals("6", res);
 
-        System.out.println("Thanks!!!!!!!!!!!!!!!!!!!!!!!!");
+        }
+
 
     }
+
 
 }
