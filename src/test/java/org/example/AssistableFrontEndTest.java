@@ -48,20 +48,6 @@ public class AssistableFrontEndTest {
         }
     }
 
-//    @Test
-//    public void testCalculator() {
-//
-//        MobileElement registerBtn = driver.findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"New User ? Sign Up\"]/android.widget.TextView"));
-//        registerBtn.click();
-//
-//        MobileElement idField = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.EditText"));
-//        idField.setValue("1234567891234");
-//
-//        MobileElement verifyBtn = driver.findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"Verify\"]/android.widget.TextView"));
-//        verifyBtn.click();
-//
-//    }
-
     @Test
     public void testCalculator() {
 
