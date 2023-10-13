@@ -29,6 +29,7 @@ public class AssistableFrontEndTest {
         cap.setCapability("appPackage", "com.twite.Assista");
         cap.setCapability("appActivity", "com.twite.Assista.MainActivity");
 
+
         // Additional desired capabilities
         cap.setCapability("automationName", "UiAutomator2");
         cap.setCapability("newCommandTimeout", 600);
